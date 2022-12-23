@@ -59,7 +59,7 @@ export default function Home() {
               <th>{fornecedor.cnpj}</th>
               <th>{fornecedor.especialidade}</th>
               <th>
-                <Link to={"/editar/" + fornecedor.id}>
+                <Link to={"/editar/" + fornecedor.id + "/" + fornecedor.cnpj}>
                   <button type="button" className="btn btn-primary">
                     Editar
                   </button>

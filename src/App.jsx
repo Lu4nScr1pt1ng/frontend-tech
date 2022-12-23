@@ -5,6 +5,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Register from "./components/Register";
+import Edit from "./components/Edit";
 
 const queryClient = new QueryClient();
 
@@ -16,9 +17,8 @@ function App() {
         <Routes>
           <Route element={<Home />} path="/" />
           <Route element={<Register />} path="/register" />
-          <Route element={<Home />} path="/edit" />
+          <Route element={<Edit />} path="/editar/:id/:cnpj" />
         </Routes>
-        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );
