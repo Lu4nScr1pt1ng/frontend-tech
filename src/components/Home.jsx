@@ -33,13 +33,14 @@ export default function Home() {
             <th scope="col">CNPJ</th>
             <th scope="col">ESPECIALIDADE</th>
             <th scope="col">EDITAR</th>
+            <th scope="col">DELETAR</th>
           </tr>
         </thead>
         <tbody>
           {data[0] ? (
             ""
           ) : (
-            <div className="text-center">Você não tem uma url criada ainda</div>
+            <div className="text-center">Você não tem um fornecedor criado ainda</div>
           )}
           {data.map((fornecedor) => (
             <tr key={fornecedor.id}>
@@ -53,6 +54,11 @@ export default function Home() {
                     Editar
                   </button>
                 </Link>
+              </th>
+              <th>
+                <button type="button" className="btn btn-danger">
+                  Deletar
+                </button>
               </th>
             </tr>
           ))}

@@ -13,6 +13,7 @@ const schema = yup
       .max(100, "Maximo de 100 caracateres"),
     cnpj: yup
       .string()
+      .matches(/^\d+$/, "Só pode conter números")
       .required("Campo obrigatório")
       .max(14, "Tem que conter 14 caracteres")
       .min(14, "Tem que conter 14 caracteres"),
@@ -42,7 +43,7 @@ export default function Register() {
           especialidade: data.select,
         })
         .then((res) => {
-          setMessage("Cadastrdo com sucesso!");
+          setMessage("CNPJ cadastrado com sucesso!");
         })
         .catch((res) => {
           setMessage(`${res.response.data.message}`);
@@ -54,53 +55,54 @@ export default function Register() {
   }
 
   return (
-    <div className="container d-flex justify-content-center mt-4">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <pre>{message ? message : ""}</pre>
-        <div className="row">
-          <div className="col">
-            <input
-              {...register("nome")}
-              type="text"
-              className="form-control"
-              placeholder="Nome"
-              aria-label="Nome"
-              required
-            />
-            {errors.nome && (
-              <p className="text-danger fs-6">{errors.nome.message}</p>
-            )}
+    <>
+      <h1 className="text-center mt-4 h2">Preencha o formulário para cadastrar um novo CNPJ</h1>
+      <div className="container d-flex justify-content-center mt-4">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <pre>{message ? message : ""}</pre>
+          <div className="row">
+            <div className="col">
+              <input
+                {...register("nome")}
+                type="text"
+                className="form-control"
+                placeholder="Nome"
+                aria-label="Nome"
+              />
+              {errors.nome && (
+                <p className="text-danger fs-6">{errors.nome.message}</p>
+              )}
+            </div>
+            <div class="col">
+              <input
+                {...register("cnpj")}
+                type="text"
+                className="form-control"
+                placeholder="CNPJ"
+                aria-label="CNPJ"
+              />
+              {errors.cnpj && (
+                <p className="text-danger fs-6">{errors.cnpj.message}</p>
+              )}
+            </div>
           </div>
-          <div class="col">
-            <input
-              {...register("cnpj")}
-              type="text"
-              className="form-control"
-              placeholder="CNPJ"
-              aria-label="CNPJ"
-              required
-            />
-            {errors.cnpj && (
-              <p className="text-danger fs-6">{errors.cnpj.message}</p>
-            )}
-          </div>
-        </div>
-        <select
-          {...register("select")}
-          className="form-select mt-4"
-          aria-label="Selecione uma especialidade"
-        >
-          <option value="Comércio">Comércio</option>
-          <option value="Serviço">Serviço</option>
-          <option value="Indústria">Indústria</option>
-        </select>
+          <select
+            {...register("select")}
+            className="form-select mt-4"
+            aria-label="Selecione uma especialidade"
+          >
+            <option value="Comércio">Comércio</option>
+            <option value="Serviço">Serviço</option>
+            <option value="Indústria">Indústria</option>
+          </select>
 
-        <div className="mt-4 d-flex justify-content-center">
-          <button type="submit" className="btn btn-primary">
-            Cadastrar CNPJ
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className="mt-4 d-flex justify-content-center">
+            <button type="submit" className="btn btn-primary">
+              Cadastrar CNPJ
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
