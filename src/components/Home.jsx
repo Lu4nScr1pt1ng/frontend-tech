@@ -8,7 +8,7 @@ export default function Home() {
       .get("https://localhost:7114" + "/v1/fornecedor")
       .then((response) => response.data);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["Fornecedores"],
     queryFn: fetchFornecedores,
   });
@@ -21,6 +21,14 @@ export default function Home() {
     return (
       <div className="text-center">Ocorreu um erro ao buscar lista de urls</div>
     );
+  }
+
+  function deletar(id) {
+    axios
+      .delete("https://localhost:7114" + "/v1/fornecedor/" + id)
+      .then((res) => {
+        refetch();
+      });
   }
 
   return (
@@ -40,7 +48,9 @@ export default function Home() {
           {data[0] ? (
             ""
           ) : (
-            <div className="text-center">Você não tem um fornecedor criado ainda</div>
+            <div className="text-center">
+              Você não tem um fornecedor criado ainda
+            </div>
           )}
           {data.map((fornecedor) => (
             <tr key={fornecedor.id}>
@@ -56,7 +66,11 @@ export default function Home() {
                 </Link>
               </th>
               <th>
-                <button type="button" className="btn btn-danger">
+                <button
+                  onClick={() => deletar(fornecedor.id)}
+                  type="button"
+                  className="btn btn-danger"
+                >
                   Deletar
                 </button>
               </th>
