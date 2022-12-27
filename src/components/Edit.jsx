@@ -82,7 +82,6 @@ export default function Edit() {
                 className="form-control"
                 placeholder="CNPJ"
                 aria-label="CNPJ"
-                disabled
               />
               {errors.cnpj && (
                 <p className="text-danger fs-6">{errors.cnpj.message}</p>
